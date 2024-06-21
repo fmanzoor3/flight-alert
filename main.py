@@ -1,5 +1,6 @@
 from data_manager import DataManager
 from flight_search import FlightSearch
+from notification_manager import NotificationManager
 from flight_data import find_cheapest_flight
 import time
 from datetime import datetime, timedelta
@@ -9,6 +10,7 @@ from pprint import pprint
 data_manager = DataManager()
 spreadsheet_data = data_manager.get_destination_data()
 flight_search = FlightSearch()
+notification_manager = NotificationManager()
 # pprint(spreadsheet_data)
 
 # Update/Generate IATA codes in our spreadsheet
@@ -38,3 +40,46 @@ for destination in spreadsheet_data:
     print(f"{destination['city']}: £{cheapest_flight.price}")
     # Slowing down requests to avoid rate limit
     time.sleep(2)
+
+    # Account for if there are no direct flights for the destination; check for cheapest indirect flights
+    if cheapest_flight.price == "N/A":
+        print(
+            f"No direct flights to {destination['city']}. Trying for indirect flights..."
+        )
+        stopover_flights = flight_search.check_flights(
+            "LON",
+            destination["iataCode"],
+            from_time=tomorrow,
+            to_time=six_month_from_today,
+            is_direct=False,
+        )
+        cheapest_flight = find_cheapest_flight(stopover_flights)
+        print(f"Cheapest indirect flight price: £{cheapest_flight.price}")
+
+    # ================ SENDING NOTIFICATIONS/EMAILS ====================
+    if (
+        cheapest_flight.price != "N/A"
+        and cheapest_flight.price < destination["lowestPrice"]
+    ):
+        # Customise the message depending on the number of stops
+        if cheapest_flight.stops == 0:
+            message = (
+                f"Low price alert! Only £{cheapest_flight.price} to fly direct "
+                f"from {cheapest_flight.origin_airport} to {cheapest_flight.destination_airport}, "
+                f"on {cheapest_flight.out_date} until {cheapest_flight.return_date}."
+            )
+        else:
+            message = (
+                f"Low price alert! Only £{cheapest_flight.price} to fly "
+                f"from {cheapest_flight.origin_airport} to {cheapest_flight.destination_airport}, "
+                f"with {cheapest_flight.stops} stop(s) "
+                f"departing on {cheapest_flight.out_date} and returning on {cheapest_flight.return_date}."
+            )
+
+        print(f"Check your email. Lower price flight found to {destination['city']}!")
+
+        # SMS
+        # notification_manager.send_sms(message_body=message)
+
+        # Whatsapp
+        notification_manager.send_whatsapp(message_body=message)
