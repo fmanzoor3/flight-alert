@@ -24,6 +24,11 @@ for row in spreadsheet_data:
 data_manager.destination_data = spreadsheet_data
 data_manager.update_destination_codes()
 
+# Obtain user emails
+user_data = data_manager.get_user_emails()
+user_email_list = [row["email"] for row in user_data]
+# print(f"Email list: {user_email_list}")
+
 # =================== FLIGHT SEARCH ============================
 tomorrow = datetime.now() + timedelta(days=1)
 six_month_from_today = datetime.now() + timedelta(days=(6 * 30))
@@ -83,3 +88,6 @@ for destination in spreadsheet_data:
 
         # Whatsapp
         notification_manager.send_whatsapp(message_body=message)
+
+        # Send email to all users
+        notification_manager.send_emails(email_list=user_email_list, email_body=message)

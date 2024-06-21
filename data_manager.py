@@ -16,6 +16,7 @@ class DataManager:
         self._password = os.environ["SHEETY_PASSWORD"]
         self._authorization = HTTPBasicAuth(self._user, self._password)
         self.prices_endpoint = os.environ["SHEETY_PRICES_ENDPOINT"]
+        self.users_endpoint = os.environ["SHEETY_USERS_ENDPOINT"]
         self._authenticaion_token = os.environ["SHEET_AUTHENTICATION_TOKEN"]
         self.destination_data = {}
 
@@ -38,3 +39,13 @@ class DataManager:
                 headers={"Authorization": f"Bearer {self._authenticaion_token}"},
             )
             # print(response.text)
+
+    def get_user_emails(self):
+        response = requests.get(
+            url=self.users_endpoint,
+            headers={"Authorization": f"Bearer {self._authenticaion_token}"},
+        )
+        data = response.json()
+        # pprint(data)
+        self.user_data = data["users"]
+        return self.user_data
