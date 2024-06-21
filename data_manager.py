@@ -28,3 +28,13 @@ class DataManager:
         # pprint(data)
         self.destination_data = data["prices"]
         return self.destination_data
+
+    def update_destination_codes(self):
+        for city in self.destination_data:
+            new_data = {"price": {"iataCode": city["iataCode"]}}
+            response = requests.put(
+                url=f"{self.prices_endpoint}/{city['id']}",
+                json=new_data,
+                headers={"Authorization": f"Bearer {self._authenticaion_token}"},
+            )
+            # print(response.text)
