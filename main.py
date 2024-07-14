@@ -87,7 +87,7 @@ for destination in spreadsheet_data:
         # notification_manager.send_sms(message_body=message)
 
         # Whatsapp
-        notification_manager.send_whatsapp(message_body=message)
+        # notification_manager.send_whatsapp(message_body=message)
 
         # Send email to all users
         notification_manager.send_emails(email_list=user_email_list, email_body=message)
