@@ -8,7 +8,7 @@ from pprint import pprint
 load_dotenv()
 
 
-class DataManager:
+class SpreadsheetManager:
 
     def __init__(self):
 

@@ -1,15 +1,15 @@
-from data_manager import DataManager
-from flight_search import FlightSearch
+from spreadsheet_manager import SpreadsheetManager
+from flight_search_api import FlightSearchAPI
 from notification_manager import NotificationManager
-from flight_data import find_cheapest_flight
+from flight_data_manager import find_cheapest_flight
 import time
 from datetime import datetime, timedelta
 from pprint import pprint
 
 # ======================= SET UP ============================
-data_manager = DataManager()
+data_manager = SpreadsheetManager()
 spreadsheet_data = data_manager.get_destination_data()
-flight_search = FlightSearch()
+flight_search = FlightSearchAPI()
 notification_manager = NotificationManager()
 # pprint(spreadsheet_data)
 

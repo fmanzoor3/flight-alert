@@ -1,4 +1,4 @@
-class FlightData:
+class FlightDataManager:
 
     def __init__(
         self, price, origin_airport, destination_airport, out_date, return_date, stops
@@ -15,7 +15,7 @@ def find_cheapest_flight(data):
     # Handle empty data if no flight or Amadeus rate limit exceeded
     if data is None or not data["data"]:
         print("No flight data")
-        return FlightData(
+        return FlightDataManager(
             price="N/A",
             origin_airport="N/A",
             destination_airport="N/A",
@@ -43,7 +43,7 @@ def find_cheapest_flight(data):
     ].split("T")[0]
 
     # Initialize FlightData with the first flight for comparison
-    cheapest_flight = FlightData(
+    cheapest_flight = FlightDataManager(
         lowest_price, origin, destination, out_date, return_date, nr_stops
     )
 
@@ -62,7 +62,7 @@ def find_cheapest_flight(data):
                 "at"
             ].split("T")[0]
             # Add number of stops
-            cheapest_flight = FlightData(
+            cheapest_flight = FlightDataManager(
                 lowest_price, origin, destination, out_date, return_date, nr_stops
             )
             print(f"Lowest price to {destination} is £{lowest_price}")

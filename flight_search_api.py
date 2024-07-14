@@ -9,7 +9,7 @@ FLIGHT_ENDPOINT = "https://test.api.amadeus.com/v2/shopping/flight-offers"
 TOKEN_ENDPOINT = "https://test.api.amadeus.com/v1/security/oauth2/token"
 
 
-class FlightSearch:
+class FlightSearchAPI:
 
     def __init__(self):
         self._api_key = os.environ["AMADEUS_API_KEY"]
