@@ -66,3 +66,10 @@ Our project is built with Python and includes the following components:
    ![Spreadsheet Example](path_to_screenshot.png)
 
 3. **Receive Notifications:** When flight prices drop below the threshold, you’ll get a notification with all the details via email.
+
+## Acknowledgements
+
+- [Google Sheets API](https://developers.google.com/sheets/api)
+- [Amadeus Flight Search API](https://developers.amadeus.com)
+- [Twilio API](https://www.twilio.com/docs/usage/api)
+- [SMTP Library](https://docs.python.org/3/library/smtplib.html)
