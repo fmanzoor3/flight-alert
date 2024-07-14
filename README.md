@@ -63,7 +63,7 @@ Our project is built with Python and includes the following components:
 
 2. **Manage Destinations and Price Limits:** We’ve got a list of popular destinations and their price limits in a Google Spreadsheet. The app regularly checks these prices and sends notifications when they go below the limits.
 
-   ![Spreadsheet Example](path_to_screenshot.png)
+   ![Spreadsheet Example](screenshots/spreadsheet.pngscreenshots/spreadsheet.png)
 
 3. **Receive Notifications:** When flight prices drop below the threshold, you’ll get a notification with all the details via email.
 
