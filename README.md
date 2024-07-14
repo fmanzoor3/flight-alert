@@ -4,7 +4,7 @@
 FlightAlert is here to help you find and be notified about affordable flights. Sign up to receive alerts when flight prices to popular destinations drop below a certain price. This project integrates various APIs to make everything work seamlessly.
 
 ## Features
-- **Popular Destinations and Price Limits**: We track popular destinations and their affordable-price threshold using a Google Spreadsheet.
+- **Popular Destinations and Affordable Prices**: We track popular destinations and their affordable-price threshold using a Google Spreadsheet.
 - **Flight Price Checking**: Our app checks flight prices using the Amadeus flight search API.
 - **Notifications**: Get notified via email, SMS, or WhatsApp when flight prices fall below the set threshold.
 - **Easy Sign-Up**: Register to get notifications about cheap flights by filling out a simple Google Form.
